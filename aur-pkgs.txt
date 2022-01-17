@@ -1,0 +1,15 @@
+# Graphical environment
+nerd-fonts-complete
+
+# Audio
+zyn-fusion
+
+# Web/email/etc
+abook
+mutt-wizard
+pam-gnupg
+urlview
+
+# Basics
+brave-bin
+miniconda3
