@@ -75,7 +75,6 @@ cadence
 pulseaudio-jack
 pulseaudio
 pavucontrol
-vital-synth
 #pulseadio-bluetooth
 #qjackctl
 

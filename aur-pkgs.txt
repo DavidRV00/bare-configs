@@ -2,6 +2,7 @@
 nerd-fonts-complete
 
 # Audio
+vital-synth
 zyn-fusion
 
 # Web/email/etc
