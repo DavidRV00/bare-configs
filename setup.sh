@@ -1,7 +1,6 @@
 #!/bin/sh
 
 # TODO:
-#		- get setup on a remote repo
 #		- try it out once as-is
 #		- passwords
 #		- manual setups
