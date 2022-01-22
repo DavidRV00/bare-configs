@@ -1,7 +1,6 @@
 #!/bin/sh
 
 # TODO:
-#		- try it out once as-is
 #		- passwords
 #		- manual setups
 #		- audio
