@@ -18,6 +18,7 @@ set -euxo pipefail
 
 alias sudo="sudo "
 alias pacman="pacman --noconfirm"
+alias makepkg="makepkg --noconfirm"
 alias yay="yay --noconfirm"
 
 srcdir="$(pwd)"

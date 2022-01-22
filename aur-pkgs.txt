@@ -1,5 +1,5 @@
 # Graphical environment
-nerd-fonts-complete
+#nerd-fonts-complete
 
 # Audio
 vital-synth
