@@ -1,17 +1,17 @@
 #!/bin/sh
 
 # TODO:
-#		- passwords
-#		- manual setups
-#		- audio
-#		- configs + customization:
-#   	- refresh on bare repos
-#   	- decide on github vs gitlab vs vps or whatever
-#  		- figure out about diffs+patch (+git possibly)
-#   	- get all current configs into bare repo
-#   	- sync bare repo with remote
-#  		- make setup.sh set up bare repo and sync from remote
-#  			- (after this, we can modify configs independently from setup script)
+#   - passwords
+#   - manual setups
+#   - audio
+#   - configs + customization:
+#     - refresh on bare repos
+#     - decide on github vs gitlab vs vps or whatever
+#       - figure out about diffs+patch (+git possibly)
+#     - get all current configs into bare repo
+#     - sync bare repo with remote
+#       - make setup.sh set up bare repo and sync from remote
+#         - (after this, we can modify configs independently from setup script)
 
 set -euxo pipefail
 
@@ -31,15 +31,15 @@ sudo pacman -S sed git
 # Passwords
 # TODO:
 # ---------------
-#	-delete current gnupg and password-store
-# 	-copy gnupg folder, export pub
-#	-delete gnupg
-#	-fresh gpg2 init
-#	-import the secret + pub
-#	-trust the key, ultimately
-#	-clone password-store
-#	-make a new password
-#	-push
+# -delete current gnupg and password-store
+# -copy gnupg folder, export pub
+# -delete gnupg
+# -fresh gpg2 init
+# -import the secret + pub
+# -trust the key, ultimately
+# -clone password-store
+# -make a new password
+# -push
 # ---------------
 # set up gpg key pair
 # import private + public key associated with password-store
@@ -109,7 +109,7 @@ sudo make install
 # TODO: set up jack+pulseaudio OR(/and/or?) pipewire
 # TODO: get pajackconnect, set up .jackdrc, set up .xinitrc
 # TODO: jack + midi: (https://manual.ardour.org/setting-up-your-system/setting-up-midi/midi-on-linux/)
-	# a2jmidid -e
+  # a2jmidid -e
 
 # TODO: automatically track new packages installed, to see if we want to add them to setup?
 # TODO: same for conda
