@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # TODO:
-#		- user(s) and any other super-basic setup
 #		- get setup on a remote repo
+#		- try it out once as-is
 #		- passwords
 #		- manual setups
 #		- audio
