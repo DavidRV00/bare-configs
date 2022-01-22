@@ -1,6 +1,8 @@
 #!/bin/sh
 
 # TODO:
+#		- user(s) and any other super-basic setup
+#		- get setup on a remote repo
 #		- passwords
 #		- manual setups
 #		- audio
@@ -15,11 +17,13 @@
 
 set -euxo pipefail
 
+alias pacman="pacman --noconfirm"
+
 mkdir -p $HOME/src
 
 # TODO: Identify and interactively mount storage
 
-sudo pacman -S --noconfirm sed git
+sudo pacman -S sed git
 
 # Passwords
 # TODO:
@@ -46,7 +50,7 @@ sudo pacman -S --noconfirm sed git
 # TODO: set .config/fontconfig/fonts.conf
 
 # Set up package settings
-sudo pacman -S --noconfirm artix-archlinux-support
+sudo pacman -S artix-archlinux-support
 
 # TODO: Put pacman.conf patch in version control
 sudo cp /etc/pacman.conf pacman.conf-bkp
@@ -57,14 +61,14 @@ sudo pacman-key --populate archlinux
 sudo cp /etc/makepkg.conf makepkg.conf-bkp
 sudo cp makepkg.conf-sample /etc/makepkg.conf
 
-sudo pacman -Syu --noconfirm
+sudo pacman -Syu
 
 # Install arch/artix packages
 # TODO: Version control the package list and fetch it dynamically
-cat pacman-pkgs.txt | sed 's/^#.*//g' | sed '/^$/d' | sudo pacman -S --noconfirm -
+cat pacman-pkgs.txt | sed 's/^#.*//g' | sed '/^$/d' | sudo pacman -S -
 
 # Install yay
-sudo pacman -S --noconfirm base-devel
+sudo pacman -S base-devel
 cd $HOME/src
 rm -rf yay
 git clone https://aur.archlinux.org/yay.git
@@ -76,7 +80,7 @@ cd $HOME
 
 # Install AUR packages
 # TODO: Version control the package list and fetch it dynamically
-cat aur-pkgs.txt | sed 's/^#.*//g' | sed '/^$/d' | yay -S --noconfirm -
+cat aur-pkgs.txt | sed 's/^#.*//g' | sed '/^$/d' | yay -S -
 
 sudo rm pacman.conf-bkp
 sudo rm makepkg.conf-bkp
