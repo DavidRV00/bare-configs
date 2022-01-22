@@ -10,6 +10,7 @@ wpa_supplicant-runit
 vim
 neovim
 alacritty
+fzf
 dunst
 git
 groff
