@@ -16,6 +16,7 @@
 
 set -euxo pipefail
 
+alias sudo="sudo "
 alias pacman="pacman --noconfirm"
 
 mkdir -p $HOME/src
