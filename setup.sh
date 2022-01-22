@@ -18,6 +18,9 @@ set -euxo pipefail
 
 alias sudo="sudo "
 alias pacman="pacman --noconfirm"
+alias yay="yay --noconfirm"
+
+srcdir="$(pwd)"
 
 mkdir -p $HOME/src
 
@@ -76,7 +79,7 @@ cd yay
 makepkg -si
 cd ..
 rm -rf yay
-cd $HOME
+cd $srcdir
 
 # Install AUR packages
 # TODO: Version control the package list and fetch it dynamically
