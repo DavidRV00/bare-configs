@@ -50,6 +50,7 @@ sudo pacman -S sed git
 sudo pacman -S artix-archlinux-support
 
 # TODO: Put pacman.conf patch in version control
+cd "$srcdir"
 sudo cp /etc/pacman.conf pacman.conf-bkp
 sudo cp pacman.conf-sample /etc/pacman.conf
 sudo pacman-key --populate archlinux
