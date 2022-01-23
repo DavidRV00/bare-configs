@@ -3,7 +3,7 @@
 
 # Audio
 vital-synth
-zyn-fusion
+#zyn-fusion
 
 # Web/email/etc
 abook

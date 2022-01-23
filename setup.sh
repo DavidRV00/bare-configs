@@ -4,14 +4,6 @@
 #   - passwords
 #   - manual setups
 #   - audio
-#   - configs + customization:
-#     - refresh on bare repos
-#     - decide on github vs gitlab vs vps or whatever
-#       - figure out about diffs+patch (+git possibly)
-#     - get all current configs into bare repo
-#     - sync bare repo with remote
-#       - make setup.sh set up bare repo and sync from remote
-#         - (after this, we can modify configs independently from setup script)
 
 set -euxo pipefail
 
@@ -92,25 +84,16 @@ make
 sudo make install
 
 # Retrieve configs + scripts / interfaces
-# TODO: git bare repo stuff?
-# TODO: get .profile and .xinitrc from version control
-# TODO: set zsh as login; source .profile in .zshrc
-# TODO: set .config/fontconfig/fonts.conf
-
-# TODO: Does this work?
 cd $HOME/src
 git clone --bare https://github.com/davidrv00/bare-configs.git
+
 alias config='git --git-dir=$HOME/src/bare-configs.git --work-tree=$HOME'
-
-# TODO: Don't do it like this
-echo "alias config='git --git-dir=$HOME/src/bare-configs.git --work-tree=$HOME'" >> ~/.zshrc
-
 config config --local status.showUntrackedFiles no
-
 config restore --staged $HOME
 config restore $HOME
 
-# Pull in templates and special data and stuff
+# TODO: Don't do it like this
+echo "alias config='git --git-dir=$HOME/src/bare-configs.git --work-tree=$HOME'" >> ~/.zshrc
 
 # TODO
 # Perform manual setups (starship, conda (+packages), plex, mutt-wizard, rss-bridge, vundle + vim plugin-install + netrw, powerline fonts, data syncing, passwords, etc)
@@ -126,15 +109,15 @@ config restore $HOME
 # TODO: jack + midi: (https://manual.ardour.org/setting-up-your-system/setting-up-midi/midi-on-linux/)
   # a2jmidid -e
 
+# Pull in templates and special data and stuff
+
 # TODO: automatically track new packages installed, to see if we want to add them to setup?
 # TODO: same for conda
 
 # Set up runit autostarts
-# TODO: loop this
-sudo ln -s /etc/runit/sv/bluetoothd /run/runit/service/
-sudo ln -s /etc/runit/sv/cronie /run/runit/service/
-sudo ln -s /etc/runit/sv/ntpd /run/runit/service/
-sudo ln -s /etc/runit/sv/wpa_supplicant /run/runit/service/
+for svc in bluetoothd cronie ntpd wpa_supplicant; do
+	sudo ln -s /etc/runit/sv/"$svc" /run/runit/service/
+done
 
 # TODO: set up cron jobs
 
