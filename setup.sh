@@ -2,8 +2,15 @@
 
 # TODO:
 #   - passwords
+#		- dmenu (/ other source-based)
+#		- get configs more in-order
 #   - manual setups
 #   - audio
+#		- storage mounting
+#		- displays, wallpapers
+#		- special data and syncing
+#		- backup all my data, local + remote
+#		- reinstall laptop
 
 set -euxo pipefail
 
@@ -75,7 +82,7 @@ cat aur-pkgs.txt | sed 's/^#.*//g' | sed '/^$/d' | yay -S -
 sudo rm pacman.conf-bkp
 sudo rm makepkg.conf-bkp
 
-# Retrieve source-based tools (dwm, dmenu, etc)
+# Retrieve source-based tools
 cd $HOME/src
 
 git clone https://github.com/DavidRV00/dwm-fork
