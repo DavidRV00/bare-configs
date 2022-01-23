@@ -46,12 +46,6 @@ sudo pacman -S sed git
 # copy passgit private ssh key
 # GIT_SSH_COMMAND="ssh -i ~/.ssh/passgit -F /dev/null" git clone ssh://git@davidv.xyz:/home/git/pass-repo ~/.password-store
 
-# Retrieve configs + scripts / interfaces
-# TODO: git bare repo stuff?
-# TODO: get .profile and .xinitrc from version control
-# TODO: set zsh as login; source .profile in .zshrc
-# TODO: set .config/fontconfig/fonts.conf
-
 # Set up package settings
 sudo pacman -S artix-archlinux-support
 
@@ -93,7 +87,27 @@ cd $HOME/src
 
 git clone https://github.com/DavidRV00/dwm-fork
 cd dwm-fork
+make
 sudo make install
+
+# Retrieve configs + scripts / interfaces
+# TODO: git bare repo stuff?
+# TODO: get .profile and .xinitrc from version control
+# TODO: set zsh as login; source .profile in .zshrc
+# TODO: set .config/fontconfig/fonts.conf
+
+# TODO: Does this work?
+cd $HOME/src
+git clone --bare https://github.com/davidrv00/bare-configs.git
+alias config='git --git-dir=$HOME/src/bare-configs.git --work-tree=$HOME'
+
+# TODO: Don't do it like this
+echo "alias config='git --git-dir=$HOME/src/bare-configs.git --work-tree=$HOME'" >> ~/.zshrc
+
+config config --local status.showUntrackedFiles no
+
+config restore --staged $HOME
+config restore $HOME
 
 # Pull in templates and special data and stuff
 

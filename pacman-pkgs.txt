@@ -55,10 +55,11 @@ noto-fonts
 ttf-ubuntu-font-family
 nitrogen
 picom
-xclip
-xdotool
+xorg
 xorg-server
 xorg-xinit
+xclip
+xdotool
 xsel
 unclutter
 redshift
