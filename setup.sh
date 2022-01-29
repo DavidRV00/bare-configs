@@ -13,6 +13,8 @@
 #		- backup all my data, local + remote
 #		- reinstall laptop
 
+# TODO: pipeline installations so the rest of the steps don't wait on non-essential packages
+
 set -x
 
 alias sudo="sudo "
