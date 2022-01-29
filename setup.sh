@@ -1,12 +1,13 @@
 #!/bin/sh
 
 # TODO:
+#		- drive mounting
 #   - passwords
 #		- dmenu (/ other source-based)
 #		- get configs more in-order
+#			- maintain branches: base, custom(/branches per computer)
 #   - manual setups
 #   - audio
-#		- storage mounting
 #		- displays, wallpapers
 #		- special data and syncing
 #		- backup all my data, local + remote
@@ -23,9 +24,36 @@ srcdir="$(pwd)"
 
 mkdir -p $HOME/src
 
-# TODO: Identify and interactively mount storage
+sudo pacman -Sy sed grep awk fzf git artools-base
 
-sudo pacman -S sed git
+# Interactively mount drives
+set +x
+get_part() {
+	prompt="$1"
+	part="$(lsblk -n --list | grep "^...[0-9]\+.*" | fzf --prompt="$prompt" | awk '{print $1}')"
+	echo "$part"
+}
+
+while true; do
+	part=$( get_part "Select a partition to mount (esc to stop): " )
+	[ "$part" != "" ] || break
+
+	echo "Enter mount location for $part: "
+	read loc
+
+	set -x
+	mkdir -p "$loc"
+	mount /dev/"$part" "$loc"
+	set +x
+	sleep 0.5
+	clear
+done
+
+lsblk
+echo
+
+echo "Writing to fstab:"
+sudo fstabgen -U / | tee /etc/fstab
 
 # Passwords
 # TODO:

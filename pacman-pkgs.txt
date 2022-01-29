@@ -15,6 +15,7 @@ dunst
 git
 groff
 exa
+rsync
 htop
 mpv
 libreoffice-still
