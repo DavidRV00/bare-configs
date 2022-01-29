@@ -154,8 +154,11 @@ echo "alias config='git --git-dir=$HOME/src/bare-configs.git --work-tree=$HOME'"
 # TODO: same for conda
 
 # Set up runit autostarts
+set +x
 for svc in bluetoothd cronie ntpd wpa_supplicant; do
+	set -x
 	sudo ln -s /etc/runit/sv/"$svc" /run/runit/service/
+	set +x
 done
 
 # TODO: set up cron jobs
