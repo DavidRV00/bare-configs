@@ -47,7 +47,7 @@ cronie
 cronie-runit
 ntp
 ntp-runit
-arch-install-scripts
+artools-base
 ntfs-3g
 
 # Graphical environment

@@ -13,7 +13,7 @@
 #		- backup all my data, local + remote
 #		- reinstall laptop
 
-set -euxo pipefail
+set -x
 
 alias sudo="sudo "
 alias pacman="pacman --noconfirm"
@@ -54,6 +54,8 @@ echo
 
 echo "Writing to fstab:"
 sudo fstabgen -U / | tee /etc/fstab
+
+set -euxo pipefail
 
 # Passwords
 # TODO:
