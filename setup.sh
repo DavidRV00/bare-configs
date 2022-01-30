@@ -1,16 +1,13 @@
 #!/bin/sh
 
 # TODO:
-#		- drive mounting
-#   - passwords
 #		- dmenu (/ other source-based)
-#		- get configs more in-order
-#			- maintain branches: base, custom(/branches per computer)
+#   - passwords
 #   - manual setups
 #   - audio
 #		- displays, wallpapers
-#		- special data and syncing
-#		- backup all my data, local + remote
+#		- get configs more in-order
+#			- maintain branches: base, custom(/branches per computer)
 #		- reinstall laptop
 
 # TODO: pipeline installations so the rest of the steps don't wait on non-essential packages
