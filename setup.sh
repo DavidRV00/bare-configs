@@ -48,7 +48,7 @@ lsblk
 echo
 
 echo "Writing to fstab:"
-sudo fstabgen -U / | tee /etc/fstab
+sudo fstabgen -U / | sudo tee /etc/fstab
 
 set -euxo pipefail
 
@@ -135,12 +135,12 @@ echo "alias config='git --git-dir=$HOME/src/bare-configs.git --work-tree=$HOME'"
 # mail sync
 
 # Set up audio
-usermod -a -G realtime,audio "$USER"
+sudo usermod -a -G realtime,audio "$USER"
 
 # TODO: Don't do it like this
 sudo sed -i '/^# End of file/d' /etc/security/limits.conf
 
-sudo cat << EOF >> /etc/security/limits.conf
+sudo cat << EOF | sudo tee -a /etc/security/limits.conf
 # audio group
 @audio		-	rtprio		95
 @audio		-	memlock		unlimited
