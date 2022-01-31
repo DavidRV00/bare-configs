@@ -18,7 +18,7 @@ exa
 rsync
 htop
 mpv
-libreoffice-still
+#libreoffice-still
 neofetch
 neomutt
 pass

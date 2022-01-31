@@ -1,16 +1,12 @@
 #!/bin/sh
 
 # TODO:
-#		- dmenu (/ other source-based)
 #   - passwords
 #   - manual setups
-#   - audio
 #		- displays, wallpapers
 #		- get configs more in-order
 #			- maintain branches: base, custom(/branches per computer)
 #		- reinstall laptop
-
-# TODO: pipeline installations so the rest of the steps don't wait on non-essential packages
 
 set -x
 
@@ -77,20 +73,17 @@ set -euxo pipefail
 # Set up package settings
 sudo pacman -S artix-archlinux-support
 
-# TODO: Put pacman.conf patch in version control
 cd "$srcdir"
 sudo cp /etc/pacman.conf pacman.conf-bkp
 sudo cp pacman.conf-sample /etc/pacman.conf
 sudo pacman-key --populate archlinux
 
-# TODO: Put makepkg.conf patch in version control
 sudo cp /etc/makepkg.conf makepkg.conf-bkp
 sudo cp makepkg.conf-sample /etc/makepkg.conf
 
 sudo pacman -Syu
 
 # Install arch/artix packages
-# TODO: Version control the package list and fetch it dynamically
 cat pacman-pkgs.txt | sed 's/^#.*//g' | sed '/^$/d' | sudo pacman -S -
 
 # Install yay
@@ -105,7 +98,6 @@ rm -rf yay
 cd $srcdir
 
 # Install AUR packages
-# TODO: Version control the package list and fetch it dynamically
 cat aur-pkgs.txt | sed 's/^#.*//g' | sed '/^$/d' | yay -S -
 
 sudo rm pacman.conf-bkp
@@ -113,9 +105,14 @@ sudo rm makepkg.conf-bkp
 
 # Retrieve source-based tools
 cd $HOME/src
-
 git clone https://github.com/DavidRV00/dwm-fork
 cd dwm-fork
+make
+sudo make install
+
+cd $HOME/src
+git clone https://github.com/DavidRV00/dmenu-fork
+cd dmenu-fork
 make
 sudo make install
 
@@ -138,13 +135,18 @@ echo "alias config='git --git-dir=$HOME/src/bare-configs.git --work-tree=$HOME'"
 # mail sync
 
 # Set up audio
-# TODO: user into realtime, audio
-# TODO: pull /etc/security/limits.conf
-# TODO: set up jack+pulseaudio OR(/and/or?) pipewire
-# TODO: get pajackconnect, set up .jackdrc, set up .xinitrc
-# TODO: jack + midi: (https://manual.ardour.org/setting-up-your-system/setting-up-midi/midi-on-linux/)
-  # a2jmidid -e
+usermod -a -G realtime,audio "$USER"
 
+# TODO: Don't do it like this
+sudo sed -i '/^# End of file/d' /etc/security/limits.conf
+
+sudo cat << EOF >> /etc/security/limits.conf
+# audio group
+@audio		-	rtprio		95
+@audio		-	memlock		unlimited
+EOF
+
+# TODO: Use some kind of spec file
 # Pull in templates and special data and stuff
 
 # TODO: automatically track new packages installed, to see if we want to add them to setup?
