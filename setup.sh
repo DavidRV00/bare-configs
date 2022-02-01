@@ -69,7 +69,7 @@ while [ "$secretfile" != "" ]; do
 
 	clear
 	echo "************************************************************************"
-	echo "Edit the gpg key to trush it"
+	echo "Edit the gpg key to trust it"
 	echo
 	echo "Hints:"
 	echo "  trust: trust the key"
