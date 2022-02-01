@@ -65,6 +65,9 @@ while [ "$secretfile" != "" ]; do
 	set +x
 
 	clear
+	key="$(gpg --list-keys | fzf --layout=reverse)"
+
+	clear
 	echo "************************************************************************"
 	echo "Edit the gpg key to trush it"
 	echo
@@ -78,13 +81,15 @@ while [ "$secretfile" != "" ]; do
 	echo "  3. y (confirm)"
 	echo "  4. q"
 	echo "************************************************************************"
+	echo
 
-	gpg --edit-key $(gpg --list-keys | fzf --layout=reverse)
+	gpg --edit-key $key
 	clear
 
 	echo "Enter gpg location to import (empty to stop): "
 	read secretfile
 done
+gpgconf --kill gpg-agent
 
 # SSH keys
 mkdir -p $HOME/.ssh
