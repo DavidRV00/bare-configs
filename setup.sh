@@ -19,7 +19,7 @@ srcdir="$(pwd)"
 
 mkdir -p $HOME/src
 
-sudo pacman -Sy sed grep awk fzf git artools-base
+sudo pacman -Sy sed grep awk fzf git artools-base gnupg
 
 # Interactively mount drives
 set +x
@@ -52,10 +52,10 @@ sudo fstabgen -U / | sudo tee /etc/fstab
 
 set -euxo pipefail
 
-# Passwords
+# Keys and passwords
+# TODO: figure out attaching USBs to VM so you can experiment in real time
 # TODO:
 # ---------------
-# -delete current gnupg and password-store
 # -copy gnupg folder, export pub
 # -delete gnupg
 # -fresh gpg2 init
@@ -65,7 +65,11 @@ set -euxo pipefail
 # -make a new password
 # -push
 # ---------------
+# TODO: pam gnupg setup
 # set up gpg key pair
+gpg --full-gen-key
+
+
 # import private + public key associated with password-store
 # copy passgit private ssh key
 # GIT_SSH_COMMAND="ssh -i ~/.ssh/passgit -F /dev/null" git clone ssh://git@davidv.xyz:/home/git/pass-repo ~/.password-store
@@ -83,8 +87,8 @@ sudo cp makepkg.conf-sample /etc/makepkg.conf
 
 sudo pacman -Syu
 
-# Install arch/artix packages
-cat pacman-pkgs.txt | sed 's/^#.*//g' | sed '/^$/d' | sudo pacman -S -
+# Install official packages
+cat pacman-pkgs.txt | sed 's/^#.*//g' | sed '/^$/d' | sudo pacman -Syu -
 
 # Install yay
 sudo pacman -S base-devel
@@ -125,7 +129,6 @@ config config --local status.showUntrackedFiles no
 config restore --staged $HOME
 config restore $HOME
 
-# TODO: Don't do it like this
 echo "alias config='git --git-dir=$HOME/src/bare-configs.git --work-tree=$HOME'" >> ~/.zshrc
 
 # TODO
@@ -137,7 +140,6 @@ echo "alias config='git --git-dir=$HOME/src/bare-configs.git --work-tree=$HOME'"
 # Set up audio
 sudo usermod -a -G realtime,audio "$USER"
 
-# TODO: Don't do it like this
 sudo sed -i '/^# End of file/d' /etc/security/limits.conf
 
 sudo cat << EOF | sudo tee -a /etc/security/limits.conf
@@ -148,9 +150,6 @@ EOF
 
 # TODO: Use some kind of spec file
 # Pull in templates and special data and stuff
-
-# TODO: automatically track new packages installed, to see if we want to add them to setup?
-# TODO: same for conda
 
 # Set up runit autostarts
 set +x
