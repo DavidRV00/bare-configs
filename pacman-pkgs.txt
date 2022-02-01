@@ -41,6 +41,8 @@ man
 gnome-calendar
 calcurse
 python-urllib3
+libssh2
+openssh
 
 # Sysadmin
 cronie
