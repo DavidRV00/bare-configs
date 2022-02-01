@@ -1,10 +1,9 @@
 #!/bin/sh
 
 # TODO:
-#   - passwords
 #   - manual setups
 #		- displays, wallpapers
-#		- get configs more in-order
+#		- organize configs better
 #			- maintain branches: base, custom(/branches per computer)
 #		- reinstall laptop
 
