@@ -9,7 +9,7 @@ alias ls="exa -a"
 alias top="htop"
 alias pacman="pacman --color always"
 alias yay="yay --color always"
-alias config='git --git-dir=$HOME/src/config --work-tree=$HOME'
+alias config='git --git-dir=$HOME/src/bare-configs.git --work-tree=$HOME'
 alias tree='tree -C'
 
 export TERMINFO=/usr/share/terminfo
