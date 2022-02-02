@@ -170,21 +170,28 @@ config config --local status.showUntrackedFiles no
 config restore --staged $HOME
 config restore $HOME
 
-echo "alias config='git --git-dir=$HOME/src/bare-configs.git --work-tree=$HOME'" >> ~/.zshrc
-
 # TODO
 # Perform manual setups (
-# 	starship,
-# 	conda (+packages),
-# 	mutt-wizard,
 # 	vundle + vim plugin-install + netrw,
 # 	fonts,
 # 	plex,
 # 	rss-bridge,
 # 	etc)
-# echo "[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh" >> ~/.bashrc
-# mw -a david@davidv.xyz
 # mail sync
+
+# Set up email
+echo
+set +x
+echo "Enter email address to set up (empty to stop): "
+read email
+while [ "$email" != "" ]; do
+	mw -a $email
+
+	echo
+	echo "Enter email address to set up (empty to stop): "
+	read email
+done
+set -x
 
 # Set up audio
 sudo usermod -a -G realtime,audio "$USER"
