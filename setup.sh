@@ -173,7 +173,15 @@ config restore $HOME
 echo "alias config='git --git-dir=$HOME/src/bare-configs.git --work-tree=$HOME'" >> ~/.zshrc
 
 # TODO
-# Perform manual setups (starship, conda (+packages), plex, mutt-wizard, rss-bridge, vundle + vim plugin-install + netrw, powerline fonts, data syncing, passwords, etc)
+# Perform manual setups (
+# 	starship,
+# 	conda (+packages),
+# 	mutt-wizard,
+# 	vundle + vim plugin-install + netrw,
+# 	fonts,
+# 	plex,
+# 	rss-bridge,
+# 	etc)
 # echo "[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh" >> ~/.bashrc
 # mw -a david@davidv.xyz
 # mail sync
