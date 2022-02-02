@@ -1,0 +1,2 @@
+#!/bin/sh
+rsync -vlrut --progress --delete --files-from=$HOME/.config/dobackups/$1 $2 $3
