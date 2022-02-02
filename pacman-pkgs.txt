@@ -43,6 +43,7 @@ calcurse
 python-urllib3
 libssh2
 openssh
+wget
 
 # Sysadmin
 cronie

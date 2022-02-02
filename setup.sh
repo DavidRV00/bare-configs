@@ -148,6 +148,15 @@ cat aur-pkgs.txt | sed 's/^#.*//g' | sed '/^$/d' | yay -S -
 sudo rm pacman.conf-bkp
 sudo rm makepkg.conf-bkp
 
+# Retrieve configs + scripts / interfaces
+cd $HOME/src
+git clone --bare https://github.com/davidrv00/bare-configs.git
+
+alias config='git --git-dir=$HOME/src/bare-configs.git --work-tree=$HOME'
+config config --local status.showUntrackedFiles no
+config restore --staged $HOME
+config restore $HOME
+
 # Retrieve source-based tools
 cd $HOME/src
 git clone https://github.com/DavidRV00/dwm-fork
@@ -161,18 +170,16 @@ cd dmenu-fork
 make
 sudo make install
 
-# Retrieve configs + scripts / interfaces
-cd $HOME/src
-git clone --bare https://github.com/davidrv00/bare-configs.git
+git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+vim +PluginInstall +qall
 
-alias config='git --git-dir=$HOME/src/bare-configs.git --work-tree=$HOME'
-config config --local status.showUntrackedFiles no
-config restore --staged $HOME
-config restore $HOME
+cd $HOME
+wget http://www.drchip.org/astronaut/vim/vbafiles/netrw.vba.gz
+vim netrw.vba.gz +"packadd vimball" +"so %" +qall
+rm $HOME/netrw.vba*
 
 # TODO
 # Perform manual setups (
-# 	vundle + vim plugin-install + netrw,
 # 	fonts,
 # 	plex,
 # 	rss-bridge,
