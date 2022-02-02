@@ -1,7 +1,8 @@
 #!/bin/sh
 
 # TODO:
-#   - manual setups
+#		- more configs
+#		- more setups
 #		- displays, wallpapers
 #		- organize configs better
 #			- maintain branches: base, custom(/branches per computer)
@@ -52,7 +53,6 @@ sudo fstabgen -U / | sudo tee /etc/fstab
 set -euxo pipefail
 
 # GPG keys
-# TODO: pam gnupg setup
 gpg --full-gen-key
 
 set +x
@@ -157,6 +157,9 @@ config config --local status.showUntrackedFiles no
 config restore --staged $HOME
 config restore $HOME
 
+touch $HOME/.vim_noport.vim
+touch $HOME/.vim_vundle_noport.vim
+
 # Retrieve source-based tools
 cd $HOME/src
 git clone https://github.com/DavidRV00/dwm-fork
@@ -178,13 +181,16 @@ wget http://www.drchip.org/astronaut/vim/vbafiles/netrw.vba.gz
 vim netrw.vba.gz +"packadd vimball" +"so %" +qall
 rm $HOME/netrw.vba*
 
+cd $HOME/src
+git clone https://github.com/brummer10/pajackconnect
+cp pajackconnect/pajackconnect $HOME/bin/
+
 # TODO
-# Perform manual setups (
-# 	fonts,
-# 	plex,
-# 	rss-bridge,
-# 	etc)
-# mail sync
+# Perform manual setups
+# 	plex
+# 	rss-bridge
+# 	mail sync
+#		pam gnupg
 
 # Set up email
 echo

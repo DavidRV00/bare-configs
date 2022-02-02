@@ -83,6 +83,7 @@ pulseaudio
 pavucontrol
 #pulseadio-bluetooth
 #qjackctl
+a2jmidid
 
 # Video recording
 obs-studio
