@@ -1,9 +1,11 @@
 export PATH=$PATH:$HOME/bin
+
 export EDITOR="nvim"
 export TERMINAL="terminal"
 export BROWSER="browser"
 export SHELL="zsh"
 
+alias sudo='sudo ' # Let sudo use aliases
 alias vim="nvim"
 alias ls="exa -a"
 alias top="htop"
@@ -14,7 +16,10 @@ alias tree='tree -C'
 
 export TERMINFO=/usr/share/terminfo
 
-# startx automatically
+export GTK_THEME=Adwaita:dark
+export GTK2_RC_FILES=/usr/share/themes/Adwaita-dark/gtk-2.0/gtkrc
+export QT_STYLE_OVERRIDE=adwaita-dark
+
 if [[ "$(tty)" = "/dev/tty1" ]]; then
 	startx
 fi
