@@ -97,12 +97,12 @@ mkdir -p $HOME/.ssh
 echo "Enter ssh key location to copy: "
 read sshfile
 while [ "$sshfile" != "" ]; do
-	cp $sshfile $HOME/.ssh
+	cp $sshfile $HOME/.ssh/
 
 	echo "Enter ssh key location to copy: "
 	read sshfile
 done
-chmod 600 ~/.ssh/*
+chmod -f 600 ~/.ssh/*
 
 # Password store
 if test -f ~/.ssh/passgit; then
