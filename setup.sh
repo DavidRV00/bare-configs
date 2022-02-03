@@ -105,7 +105,10 @@ done
 chmod 600 ~/.ssh/*
 
 # Password store
-GIT_SSH_COMMAND="ssh -i ~/.ssh/passgit -F /dev/null" git clone ssh://git@davidv.xyz:/home/git/pass-repo $HOME/.password-store
+if test -f $HOME/.password-store; then
+	GIT_SSH_COMMAND="ssh -i ~/.ssh/passgit -F /dev/null" \
+		git clone ssh://git@davidv.xyz:/home/git/pass-repo $HOME/.password-store
+fi
 
 # Git config
 echo "Enter git email: "
