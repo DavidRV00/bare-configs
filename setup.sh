@@ -102,7 +102,9 @@ while [ "$sshfile" != "" ]; do
 	echo "Enter ssh key location to copy: "
 	read sshfile
 done
-chmod -f 600 ~/.ssh/*
+if [ "$(ls ~/.ssh)" != "" ]; then
+	chmod 600 ~/.ssh/*
+fi
 
 # Password store
 if test -f ~/.ssh/passgit; then
