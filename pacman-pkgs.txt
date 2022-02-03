@@ -32,7 +32,7 @@ sxiv
 tmux
 tree
 unzip
-#youtube-dl
+yt-dlp
 zathura
 zathura-pdf-poppler
 zip

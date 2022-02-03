@@ -1,13 +1,23 @@
 #!/bin/sh
 
 # TODO:
+#		- more configs
+#			- alacritty
+#			- newsboat
+#			- interaces (emailclient, feeds, ...)
+#		- more setups
+#			- rss-bridge
+#			- vim-jupyter
 #		- reinstall laptop
 #			- backup everything
 #			- artix on usb
+#		- data
+#			- rss feeds
+#			- liked media
+#			- bookmarks
+#			- website settings?
 #		- midi config?
 #		- optional bluetooth?
-#		- more configs
-#		- more setups
 #		- organize configs better
 #			- maintain branches: base, custom(/branches per computer)
 
@@ -198,7 +208,10 @@ cp pajackconnect/pajackconnect $HOME/bin/
 # 	plex
 # 	rss-bridge
 # 	mail sync
+#		pass git alias / command
 #		pam gnupg
+#		git passwords + token
+#		vim-jupyter
 
 # Set up email
 echo
