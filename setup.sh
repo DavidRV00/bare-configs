@@ -1,9 +1,11 @@
 #!/bin/sh
 
 # TODO:
+#		- gtk/gq theme
+#		- midi config?
+#		- optional bluetooth?
 #		- more configs
 #		- more setups
-#		- displays, wallpapers
 #		- organize configs better
 #			- maintain branches: base, custom(/branches per computer)
 #		- reinstall laptop
