@@ -1,0 +1,7 @@
+#!/bin/sh
+layoutscript="$(ls $HOME/.screenlayout/*.sh | head -n1)"
+if [ "$layoutscript" == "" ]; then
+	arandr
+else
+	sh $layoutscript
+fi
