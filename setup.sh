@@ -3,11 +3,14 @@
 # TODO:
 #		- more configs
 #			- alacritty
+#				- fonts
 #			- newsboat
-#			- interaces (emailclient, feeds, ...)
+#			- interfaces (emailclient, feeds, ...)
 #		- more setups
 #			- rss-bridge
-#			- vim-jupyter
+#			- vim
+#				- nvim python interpreter
+#				- vim-jupyter
 #		- reinstall laptop
 #			- backup everything
 #			- artix on usb
