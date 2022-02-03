@@ -1,14 +1,15 @@
 #!/bin/sh
 
 # TODO:
-#		- gtk/gq theme
+#		- reinstall laptop
+#			- backup everything
+#			- artix on usb
 #		- midi config?
 #		- optional bluetooth?
 #		- more configs
 #		- more setups
 #		- organize configs better
 #			- maintain branches: base, custom(/branches per computer)
-#		- reinstall laptop
 
 set -x
 
