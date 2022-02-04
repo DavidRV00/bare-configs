@@ -27,7 +27,6 @@
 #			- pam gnupg
 #			- git passwords + token
 
-
 set -x
 
 alias sudo="sudo "
