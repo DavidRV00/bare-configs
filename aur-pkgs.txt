@@ -5,6 +5,7 @@ adwaita-qt6
 # Audio
 vital-synth
 #zyn-fusion
+#distrho-ports-lv2-git
 
 # Web/email/etc
 abook

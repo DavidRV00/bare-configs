@@ -1,28 +1,32 @@
 #!/bin/sh
 
 # TODO:
-#		- more configs
-#			- alacritty
-#				- fonts
-#			- newsboat
-#			- interfaces (emailclient, feeds, ...)
 #		- more setups
-#			- rss-bridge
 #			- vim
 #				- nvim python interpreter
 #				- vim-jupyter
+#		- data
+#			- liked media
+#			- bookmarks (browser, rss)
+#			- website settings?
+#			- emails
+#		- sync rss urls over private git
 #		- reinstall laptop
 #			- backup everything
 #			- artix on usb
-#		- data
-#			- rss feeds
-#			- liked media
-#			- bookmarks
-#			- website settings?
+#		- remote backups
 #		- midi config?
 #		- optional bluetooth?
 #		- organize configs better
 #			- maintain branches: base, custom(/branches per computer)
+#		- make modular, idempotent setup scripts that can be simply slotted in
+# 		- plex
+# 		- rss-bridge
+# 		- mail sync
+#			- pass git alias / command
+#			- pam gnupg
+#			- git passwords + token
+
 
 set -x
 
@@ -206,16 +210,6 @@ cd $HOME/src
 git clone https://github.com/brummer10/pajackconnect
 cp pajackconnect/pajackconnect $HOME/bin/
 
-# TODO
-# Perform manual setups
-# 	plex
-# 	rss-bridge
-# 	mail sync
-#		pass git alias / command
-#		pam gnupg
-#		git passwords + token
-#		vim-jupyter
-
 # Set up email
 echo
 set +x
@@ -251,6 +245,9 @@ for svc in bluetoothd cronie ntpd wpa_supplicant; do
 	sudo ln -s /etc/runit/sv/"$svc" /run/runit/service/
 	set +x
 done
+
+# Default applications
+xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop
 
 # TODO: set up cron jobs
 

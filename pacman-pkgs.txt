@@ -44,6 +44,8 @@ python-urllib3
 libssh2
 openssh
 wget
+newsboat
+transmission-cli
 
 # Sysadmin
 cronie
