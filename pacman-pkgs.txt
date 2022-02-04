@@ -70,6 +70,7 @@ xsel
 unclutter
 redshift
 gnome-themes-extra
+xf86-video-intel
 
 # Image manipulation
 imagemagick

@@ -5,15 +5,16 @@
 #			- vim
 #				- nvim python interpreter
 #				- vim-jupyter
+#		- reinstall laptop
+#			- backup everything
+#			- artix on usb
+#---------------------------------------
 #		- data
 #			- liked media
 #			- bookmarks (browser, rss)
 #			- website settings?
 #			- emails
 #		- sync rss urls over private git
-#		- reinstall laptop
-#			- backup everything
-#			- artix on usb
 #		- remote backups
 #		- midi config?
 #		- optional bluetooth?
@@ -197,13 +198,20 @@ cd dmenu-fork
 make
 sudo make install
 
-git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
-vim +PluginInstall +qall
+cd $HOME/src
+git clone https://github.com/DavidRV00/vim-jupyter-run
+cd vim-jupyter-run
+./install
+pip install nbformat
+pip install nbconver
 
 cd $HOME
 wget http://www.drchip.org/astronaut/vim/vbafiles/netrw.vba.gz
 vim netrw.vba.gz +"packadd vimball" +"so %" +qall
 rm $HOME/netrw.vba*
+
+git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+vim +PluginInstall +qall
 
 cd $HOME/src
 git clone https://github.com/brummer10/pajackconnect
@@ -234,8 +242,8 @@ sudo cat << EOF | sudo tee -a /etc/security/limits.conf
 @audio		-	memlock		unlimited
 EOF
 
-# TODO: Use some kind of spec file
 # Pull in templates and special data and stuff
+# TODO: Use some kind of spec file
 
 # Set up runit autostarts
 set +x
@@ -247,6 +255,15 @@ done
 
 # Default applications
 xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop
+
+# Xorg config
+sudo cat << EOF | sudo tee -a /etc/X11/xorg.conf.d/20-intel-gpu.conf
+Section "Device"
+	Identifier	"Intel Graphics"
+	Driver		"intel"
+	Option		"TearFree"	"true"
+EndSection
+EOF
 
 # TODO: set up cron jobs
 
