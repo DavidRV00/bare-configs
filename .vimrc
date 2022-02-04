@@ -273,7 +273,7 @@ augroup myCmds
 augroup END
 
 " Edit and run jupyter-notebook-style scripts from Vim
-"source $HOME/.vim/jupyterrun.vim
+source $HOME/.vim/jupyterrun.vim
 
 " Netrw-specific maps
 nmap <Leader>- <Plug>VinegarUp
