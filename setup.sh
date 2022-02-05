@@ -1,13 +1,11 @@
 #!/bin/sh
 
 # TODO:
-#		- more setups
-#			- vim
-#				- nvim python interpreter
-#				- vim-jupyter
+#		- run through vm install
 #		- reinstall laptop
-#			- backup everything
 #			- artix on usb
+#			- backup everything to external
+#			- attach external and pull data
 #---------------------------------------
 #		- data
 #			- liked media
@@ -202,6 +200,7 @@ cd $HOME/src
 git clone https://github.com/DavidRV00/vim-jupyter-run
 cd vim-jupyter-run
 ./install
+export PATH="/opt/miniconda3/bin:$PATH"
 pip install nbformat
 pip install nbconver
 
