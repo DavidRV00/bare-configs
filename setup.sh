@@ -1,11 +1,6 @@
 #!/bin/sh
 
 # TODO:
-#		- run through vm install
-#		- reinstall laptop
-#			- artix on usb
-#			- backup everything to external
-#			- attach external and pull data
 #---------------------------------------
 #		- data
 #			- liked media
@@ -37,7 +32,7 @@ srcdir="$(pwd)"
 
 mkdir -p $HOME/src
 
-sudo pacman -Sy sed grep awk fzf git artools-base gnupg libssh2 openssh
+sudo pacman -Sy sed grep awk fzf git artools-base gnupg libssh2 openssh ntfs-3g
 
 # Interactively mount drives
 set +x
@@ -202,15 +197,15 @@ cd vim-jupyter-run
 ./install
 export PATH="/opt/miniconda3/bin:$PATH"
 pip install nbformat
-pip install nbconver
+pip install nbconvert
+
+git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+vim +PluginInstall +qall
 
 cd $HOME
 wget http://www.drchip.org/astronaut/vim/vbafiles/netrw.vba.gz
 vim netrw.vba.gz +"packadd vimball" +"so %" +qall
 rm $HOME/netrw.vba*
-
-git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
-vim +PluginInstall +qall
 
 cd $HOME/src
 git clone https://github.com/brummer10/pajackconnect
@@ -264,7 +259,4 @@ Section "Device"
 EndSection
 EOF
 
-# TODO: set up cron jobs
-
-# TODO: interactively set up displays + wallpaper
-
+# TODO: Setup audio output(s)

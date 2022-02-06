@@ -46,6 +46,7 @@ openssh
 wget
 newsboat
 transmission-cli
+python-pynvim
 
 # Sysadmin
 cronie
@@ -86,7 +87,7 @@ pulseaudio-jack
 pulseaudio
 pavucontrol
 #pulseadio-bluetooth
-#qjackctl
+qjackctl
 a2jmidid
 
 # Video recording
