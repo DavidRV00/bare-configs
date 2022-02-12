@@ -1,0 +1,3 @@
+#!/bin/sh
+dobackups $1 $2 $3
+dobackups $1 $3 $2
