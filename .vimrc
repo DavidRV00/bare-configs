@@ -415,15 +415,17 @@ syntax on
 
 " Notebook conceal
 augroup py
+  autocmd BufNewFile,BufRead *.py,*.r,*.R :set updatetime=100
+
   "autocmd BufNewFile,BufRead *.py,*.r,*.R :syntax match Normal '^# In\[.*\]:.*' conceal cchar=_
   "autocmd BufNewFile,BufRead *.py,*.r,*.R :syntax match Normal '^# In\[.*\]:.*' conceal cchar=¶
   "autocmd BufNewFile,BufRead *.py,*.r,*.R :syntax match Normal '^# In\[.*\]:.*' conceal cchar=»
-  autocmd BufNewFile,BufRead *.py,*.r,*.R :syntax match Normal '^# In\[.*\]:.*' conceal cchar=―
+  autocmd BufNewFile,BufRead,CursorHold *.py,*.r,*.R :syntax match Normal '^# In\[.*\]:.*' conceal cchar=―
   "autocmd BufNewFile,BufRead *.py,*.r,*.R :syntax match Normal '^# In\[.*\]:.*' conceal cchar=━
   "autocmd BufNewFile,BufRead *.py,*.r,*.R :syntax match Normal '^# In\[.*\]:.*' conceal cchar=┈
   "autocmd BufNewFile,BufRead *.py,*.r,*.R :syntax match Normal '^# In\[.*\]:.*' conceal cchar=⎯
-  autocmd BufNewFile,BufRead *.py,*.r,*.R :set conceallevel=1
-  autocmd BufNewFile,BufRead *.py,*.r,*.R :set concealcursor=nc " ,*.md,*.wiki
+  autocmd BufNewFile,BufRead,CursorHold *.py,*.r,*.R :set conceallevel=1
+  autocmd BufNewFile,BufRead,CursorHold *.py,*.r,*.R :set concealcursor=nc " ,*.md,*.wiki
 augroup END
 
 " Auto-write latex files if cursor is held still (then vimtex compiles on save)
@@ -489,7 +491,10 @@ highlight Comment cterm=italic
 "hi! LineNr ctermbg=232 ctermfg=236
 "hi! CursorLineNr cterm=NONE ctermbg=232 ctermfg=68
 ""hi! CursorLineNr cterm=NONE ctermbg=68 ctermfg=232
-hi! CursorLine cterm=NONE ctermbg=233
+
+"hi! CursorLine cterm=NONE ctermbg=233
+hi! CursorLine cterm=NONE ctermbg=60
+
 "hi! TabLineFill ctermfg=234 ctermbg=234
 ""hi! TabLineSel ctermbg=236 ctermfg=75
 "hi! TabLineSel ctermbg=68 ctermfg=16
@@ -497,7 +502,7 @@ hi! CursorLine cterm=NONE ctermbg=233
 "hi! TabNum ctermbg=234 ctermfg=None
 "hi! Pmenu ctermbg=24 ctermfg=16
 "hi! PmenuSel ctermbg=16 ctermfg=39
-"hi! Conceal ctermfg=68 ctermbg=NONE
+hi! Conceal ctermfg=68 ctermbg=NONE
 ""hi! VertSplit ctermbg=16 ctermfg=16
 ""hi! VertSplit ctermbg=NONE ctermfg=232
 "hi! VertSplit ctermbg=232 ctermfg=232
