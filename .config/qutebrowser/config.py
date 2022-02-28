@@ -91,6 +91,8 @@ c.auto_save.interval = 300
 # c.colors.webpage.darkmode.enabled = True
 # config.bind('I', 'config-cycle colors.webpage.darkmode.enabled ;; restart')
 
+c.editor.command = ["terminal", "-e", "nvim", "{}"]
+
 # ================================================================
 # Colors
 # ================================================================
