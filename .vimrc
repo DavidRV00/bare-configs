@@ -492,8 +492,9 @@ highlight Comment cterm=italic
 "hi! CursorLineNr cterm=NONE ctermbg=232 ctermfg=68
 ""hi! CursorLineNr cterm=NONE ctermbg=68 ctermfg=232
 
-"hi! CursorLine cterm=NONE ctermbg=233
-hi! CursorLine cterm=NONE ctermbg=60
+hi! CursorLine cterm=NONE ctermbg=233
+"hi! CursorLine cterm=NONE ctermbg=60
+"hi! CursorLine cterm=NONE ctermbg=239
 
 "hi! TabLineFill ctermfg=234 ctermbg=234
 ""hi! TabLineSel ctermbg=236 ctermfg=75
