@@ -1,14 +1,22 @@
 #!/bin/sh
 
 # TODO:
+#		- fix up password stores
+#   - storagevps key
+#			- laptop -> external -> desktop
+#			- remote backups
+#			- remote syncs
+#		- push laptop changes
+#		- remote backups and git repos
+#		- make music on desktop
+#---------------------------------------
+#		- figure out jack+midi+bluetooth setup
 #---------------------------------------
 #		- data
 #			- liked media
 #			- bookmarks (browser, rss)
 #			- website settings?
 #			- emails
-#		- sync rss urls over private git
-#		- remote backups
 #		- midi config?
 #		- optional bluetooth?
 #		- organize configs better
@@ -19,7 +27,8 @@
 # 		- mail sync
 #			- pass git alias / command
 #			- pam gnupg
-#			- git passwords + token
+#				- follow the instructions in https://github.com/cruegge/pam-gnupg
+#					- login, system-local-login, ...
 
 set -x
 
@@ -105,6 +114,7 @@ gpgconf --kill gpg-agent
 
 # SSH keys
 mkdir -p $HOME/.ssh
+ssh-keygen
 echo "Enter ssh key location to copy: "
 read sshfile
 while [ "$sshfile" != "" ]; do
