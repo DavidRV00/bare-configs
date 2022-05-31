@@ -148,11 +148,11 @@ sudo pacman -S artix-archlinux-support
 
 cd "$srcdir"
 sudo cp /etc/pacman.conf pacman.conf-bkp
-sudo cp pacman.conf-sample /etc/pacman.conf
+sudo cp pkg-config/pacman.conf-sample /etc/pacman.conf
 sudo pacman-key --populate archlinux
 
 sudo cp /etc/makepkg.conf makepkg.conf-bkp
-sudo cp makepkg.conf-sample /etc/makepkg.conf
+sudo cp pkg-config/makepkg.conf-sample /etc/makepkg.conf
 
 sudo pacman -Syu
 
