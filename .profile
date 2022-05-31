@@ -7,7 +7,7 @@ export SHELL="zsh"
 
 alias sudo='sudo ' # Let sudo use aliases
 alias vim="nvim"
-alias ls="exa -a"
+alias ls="exa"
 alias top="htop"
 alias pacman="pacman --color always"
 alias yay="yay --color always"

@@ -136,7 +136,7 @@ if exists("+showtabline")
     endwhile
     let s .= '%T%#TabLineFill#%='
     let s .= (tabpagenr('$') > 1 ? '%999XX' : 'X')
-    let s .= '%#TabLineSel# vim '
+    "let s .= '%#TabLineSel# vim '
     return s
   endfunction
   set stal=2
@@ -153,6 +153,7 @@ inoremap kj <Esc>
 vnoremap KJ <Esc>
 nnoremap Y y$
 inoremap <leader>w <Esc>:<C-u>w<CR>
+inoremap <C-S-O> <Esc>O
 nnoremap <leader>w :<C-u>w<CR>
 nnoremap <leader>sv :<C-u>source ~/.vimrc<CR>
 nnoremap <leader>v :<C-u>vsplit<CR>
@@ -471,14 +472,14 @@ set background=dark
 "endfunction
 "autocmd VimEnter * call AirlineInit()
 
-set cursorline
 
 "let &colorcolumn=join(range(101,999),",")
 
-augroup colorenter
-  autocmd WinEnter * set cursorline
-  autocmd WinLeave * set nocursorline
-augroup END
+"set cursorline
+"augroup colorenter
+"  autocmd WinEnter * set cursorline
+"  autocmd WinLeave * set nocursorline
+"augroup END
 
 set fillchars+=vert:\ " Note the space
 "set fillchars+=vert:∎" Note the space
@@ -492,7 +493,7 @@ highlight Comment cterm=italic
 "hi! CursorLineNr cterm=NONE ctermbg=232 ctermfg=68
 ""hi! CursorLineNr cterm=NONE ctermbg=68 ctermfg=232
 
-hi! CursorLine cterm=NONE ctermbg=233
+hi! CursorLine cterm=NONE ctermbg=60
 "hi! CursorLine cterm=NONE ctermbg=60
 "hi! CursorLine cterm=NONE ctermbg=239
 
