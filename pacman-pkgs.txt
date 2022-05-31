@@ -48,6 +48,7 @@ newsboat
 transmission-cli
 python-pynvim
 texlive-most
+entr
 
 # Sysadmin
 cronie
