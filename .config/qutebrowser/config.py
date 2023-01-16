@@ -5,8 +5,8 @@ config.load_autoconfig()
 c.tabs.position = "top"
 
 c.url.searchengines = {
-    # 'DEFAULT':       'https://searx.ninja/search?q={}',
-    'DEFAULT':       'https://searx.be/search?q={}',
+    'DEFAULT':       'https://searx.ninja/search?q={}',
+    # 'DEFAULT':       'https://searx.be/search?q={}',
 }
 with open('/home/david/.config/qutebrowser/searchengines') as csvfile:
     reader = csv.reader(csvfile, delimiter=' ')
