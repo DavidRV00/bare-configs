@@ -51,6 +51,10 @@ config.bind(',R', 'spawn getrss-youtube {url}')
 
 config.bind(';s', 'spawn passmenu -b ;; hint inputs')
 
+config.bind(',B', 'spawn --userscript qute-buku')
+config.bind(',o', 'spawn --userscript qute-bukuopen')
+config.bind(',O', 'spawn --userscript qute-bukuopen -t')
+
 # Workaround for jump-to-top bug
 # config.bind('o', 'set statusbar.show always;; set-cmd-text -s :open')
 # config.bind('o', 'set statusbar.show always;; set-cmd-text -s :open')
