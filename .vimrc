@@ -160,6 +160,7 @@ inoremap kj <Esc>
 vnoremap KJ <Esc>
 nnoremap Y y$
 inoremap <leader>w <Esc>:<C-u>w<CR>
+inoremap <C-S-O> <Esc>O
 nnoremap <leader>w :<C-u>w<CR>
 nnoremap <leader>sv :<C-u>source ~/.vimrc<CR>
 nnoremap <leader>v :<C-u>vsplit<CR>
@@ -491,16 +492,18 @@ syntax on
 
 " Notebook conceal
 augroup py
+	autocmd BufNewFile,BufRead *.py,*.r,*.R :set updatetime=100
+
   "autocmd BufNewFile,BufRead *.py,*.r,*.R :syntax match Normal '^# In\[.*\]:.*' conceal cchar=_
   "autocmd BufNewFile,BufRead *.py,*.r,*.R :syntax match Normal '^# In\[.*\]:.*' conceal cchar=¶
   "autocmd BufNewFile,BufRead *.py,*.r,*.R :syntax match Normal '^# In\[.*\]:.*' conceal cchar=»
-  autocmd BufNewFile,BufRead *.py,*.r,*.R :syntax match Normal '^# In\[.*\]:.*' conceal cchar=
-  "autocmd BufNewFile,BufRead *.py,*.r,*.R :syntax match Normal '^# In\[.*\]:.*' conceal cchar=―
+  "autocmd BufNewFile,BufRead *.py,*.r,*.R :syntax match Normal '^# In\[.*\]:.*' conceal cchar=
+	autocmd BufNewFile,BufRead,CursorHold *.py,*.r,*.R :syntax match Normal '^# In\[.*\]:.*' conceal cchar=―
   "autocmd BufNewFile,BufRead *.py,*.r,*.R :syntax match Normal '^# In\[.*\]:.*' conceal cchar=━
   "autocmd BufNewFile,BufRead *.py,*.r,*.R :syntax match Normal '^# In\[.*\]:.*' conceal cchar=┈
   "autocmd BufNewFile,BufRead *.py,*.r,*.R :syntax match Normal '^# In\[.*\]:.*' conceal cchar=⎯
-  autocmd BufNewFile,BufRead *.py,*.r,*.R :set conceallevel=1
-  autocmd BufNewFile,BufRead *.py,*.r,*.R :set concealcursor=nc " ,*.md,*.wiki
+  autocmd BufNewFile,BufRead,CursorHold *.py,*.r,*.R :set conceallevel=1
+  autocmd BufNewFile,BufRead,CursorHold *.py,*.r,*.R :set concealcursor=nc " ,*.md,*.wiki
 augroup END
 
 " Auto-write latex files if cursor is held still (then vimtex compiles on save)
