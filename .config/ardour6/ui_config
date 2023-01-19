@@ -8,13 +8,13 @@
     <Option name="flat-buttons" value="1"/>
     <Option name="boxy-buttons" value="1"/>
     <Option name="blink-rec-arm" value="0"/>
-    <Option name="blink-alert-indicators" value="0"/>
+    <Option name="blink-alert-indicators" value="1"/>
     <Option name="waveform-gradient-depth" value="0"/>
-    <Option name="timeline-item-gradient-depth" value="0"/>
-    <Option name="all-floating-windows-are-dialogs" value="0"/>
+    <Option name="timeline-item-gradient-depth" value="0.5"/>
+    <Option name="all-floating-windows-are-dialogs" value="1"/>
     <Option name="floating-monitor-section" value="0"/>
     <Option name="transients-follow-front" value="0"/>
-    <Option name="color-regions-using-track-color" value="1"/>
+    <Option name="color-regions-using-track-color" value="0"/>
     <Option name="vertical-region-gap" value="0"/>
     <Option name="editor-stereo-only-meters" value="1"/>
     <Option name="show-waveform-clipping" value="1"/>
@@ -30,7 +30,7 @@
     <Option name="default-bindings" value="ardour"/>
     <Option name="vkeybd-layout" value="QWERTY Single"/>
     <Option name="only-copy-imported-files" value="1"/>
-    <Option name="autoplay-files" value="0"/>
+    <Option name="autoplay-files" value="1"/>
     <Option name="default-narrow_ms" value="0"/>
     <Option name="name-new-markers" value="0"/>
     <Option name="rubberbanding-snaps-to-grid" value="0"/>
@@ -41,7 +41,7 @@
     <Option name="waveform-shape" value="Traditional"/>
     <Option name="update-editor-during-summary-drag" value="1"/>
     <Option name="never-display-periodic-midi" value="1"/>
-    <Option name="sound-midi-notes" value="0"/>
+    <Option name="sound-midi-notes" value="1"/>
     <Option name="show-plugin-scan-window" value="0"/>
     <Option name="show-zoom-tools" value="1"/>
     <Option name="use-mouse-position-as-zoom-focus-on-scroll" value="1"/>
@@ -80,7 +80,7 @@
     <Option name="show-toolbar-monitor-info" value="0"/>
     <Option name="show-mini-timeline" value="1"/>
     <Option name="show-secondary-clock" value="1"/>
-    <Option name="waveform-clip-level" value="-0.5"/>
+    <Option name="waveform-clip-level" value="-0.093396699999999999"/>
     <Option name="hiding-groups-deactivates-groups" value="1"/>
     <Option name="no-new-session-dialog" value="1"/>
     <Option name="buggy-gradients" value="0"/>
@@ -105,15 +105,15 @@
     <Option name="show-snapped-cursor" value="1"/>
     <Option name="snap-threshold" value="25"/>
     <Option name="ruler-granularity" value="25"/>
-    <Option name="snap-to-marks" value="0"/>
-    <Option name="snap-to-region-sync" value="0"/>
-    <Option name="snap-to-region-start" value="0"/>
-    <Option name="snap-to-region-end" value="0"/>
+    <Option name="snap-to-marks" value="1"/>
+    <Option name="snap-to-region-sync" value="1"/>
+    <Option name="snap-to-region-start" value="1"/>
+    <Option name="snap-to-region-end" value="1"/>
     <Option name="snap-to-grid" value="1"/>
     <Option name="show-grids-ruler" value="1"/>
     <Option name="rulers-follow-grid" value="0"/>
     <Option name="grid-follows-internal" value="0"/>
-    <Option name="show-region-name" value="0"/>
+    <Option name="show-region-name" value="1"/>
     <Option name="time-axis-name-ellipsize-mode" value="0"/>
   </UI>
   <Canvas>

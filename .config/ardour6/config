@@ -103,7 +103,7 @@
     <Option name="meter-type-master" value="MeterK14"/>
     <Option name="meter-type-track" value="MeterPeak"/>
     <Option name="meter-type-bus" value="MeterPeak"/>
-    <Option name="try-autostart-engine" value="0"/>
+    <Option name="try-autostart-engine" value="1"/>
     <Option name="hide-dummy-backend" value="1"/>
     <Option name="copy-demo-sessions" value="1"/>
     <Option name="auditioner-output-left" value="default"/>
@@ -172,7 +172,7 @@
     <Keyboard copy-modifier="4" edit-button="3" edit-modifier="4" delete-button="3" delete-modifier="1" snap-modifier="8" snap-delta-modifier="67108936" insert-note-button="1" insert-note-modifier="4" constraint-modifier="1" slip-contents-modifier="5" trim-overlap-modifier="1" trim-anchored-modifier="5" fine-adjust-modifier="12" push-points-modifier="67108932" note-size-relative-modifier="1"/>
     <UI status-bar="Audio,Disk,DSP">
       <Window name="key-editor" visible="0" x-off="-1" y-off="-1" x-size="-1" y-size="-1"/>
-      <Window name="session-options-editor" visible="0" x-off="0" y-off="236" x-size="669" y-size="365"/>
+      <Window name="session-options-editor" visible="0" x-off="258" y-off="384" x-size="669" y-size="365"/>
       <Window name="speaker-config" visible="0" x-off="-1" y-off="-1" x-size="-1" y-size="-1"/>
       <Window name="about" visible="0" x-off="-1" y-off="-1" x-size="-1" y-size="-1"/>
       <Window name="add-routes" visible="0" x-off="-1" y-off="-1" x-size="634" y-size="503"/>
@@ -187,9 +187,9 @@
       <Window name="big-transport" visible="0" x-off="-1" y-off="-1" x-size="-1" y-size="-1"/>
       <Window name="virtual-keyboard" visible="0" x-off="-1" y-off="-1" x-size="-1" y-size="-1"/>
       <Window name="audio-connection-manager" visible="0" x-off="-1" y-off="-1" x-size="-1" y-size="-1"/>
-      <Window name="midi-connection-manager" visible="0" x-off="-1" y-off="-1" x-size="-1" y-size="-1"/>
+      <Window name="midi-connection-manager" visible="0" x-off="173" y-off="121" x-size="413" y-size="303"/>
       <Window name="idle-o-meter" visible="0" x-off="-1" y-off="-1" x-size="-1" y-size="-1"/>
-      <Window name="plugin-manager" visible="0" x-off="262" y-off="40" x-size="646" y-size="600"/>
+      <Window name="plugin-manager" visible="0" x-off="641" y-off="452" x-size="897" y-size="871"/>
       <Window name="plugin-dsp-load" visible="0" x-off="-1" y-off="-1" x-size="-1" y-size="-1"/>
       <Window name="dsp-statistics" visible="0" x-off="-1" y-off="-1" x-size="-1" y-size="-1"/>
       <Window name="transport-masters" visible="0" x-off="-1" y-off="-1" x-size="-1" y-size="-1"/>
@@ -266,14 +266,17 @@
     </UI>
     <AudioMIDISetup>
       <EngineStates>
-        <State backend="JACK" driver="" device="HDA Intel PCH" input-device="" output-device="" sample-rate="44100" buffer-size="1024" n-periods="2" input-latency="0" output-latency="0" input-channels="0" output-channels="0" lm-input="" lm-output="" active="1" use-buffered-io="0" midi-option="" lru="1664229998">
+        <State backend="JACK" driver="" device="HDA Intel PCH" input-device="" output-device="" sample-rate="44100" buffer-size="1024" n-periods="2" input-latency="0" output-latency="0" input-channels="0" output-channels="0" lm-input="" lm-output="" active="1" use-buffered-io="0" midi-option="" lru="1663953645">
           <MIDIDevices/>
         </State>
-        <State backend="Pulseaudio" driver="" device="Default Playback" input-device="" output-device="" sample-rate="48000" buffer-size="1024" n-periods="0" input-latency="0" output-latency="0" input-channels="0" output-channels="0" lm-input="" lm-output="" active="0" use-buffered-io="0" midi-option="None" lru="1660867273">
+        <State backend="Pulseaudio" driver="" device="Default Playback" input-device="" output-device="" sample-rate="48000" buffer-size="1024" n-periods="0" input-latency="0" output-latency="0" input-channels="0" output-channels="0" lm-input="" lm-output="" active="0" use-buffered-io="0" midi-option="None" lru="1639896411">
           <MIDIDevices/>
         </State>
-        <State backend="ALSA" driver="" device="" input-device="HDA Intel PCH" output-device="HDA Intel PCH" sample-rate="48000" buffer-size="1024" n-periods="2" input-latency="0" output-latency="0" input-channels="0" output-channels="0" lm-input="" lm-output="" active="0" use-buffered-io="0" midi-option="ALSA raw devices" lru="1651252904">
-          <MIDIDevices/>
+        <State backend="ALSA" driver="" device="" input-device="HDA Intel PCH" output-device="HDA Intel PCH" sample-rate="48000" buffer-size="1024" n-periods="2" input-latency="0" output-latency="0" input-channels="0" output-channels="0" lm-input="" lm-output="" active="0" use-buffered-io="0" midi-option="ALSA raw devices" lru="1639266403">
+          <MIDIDevices>
+            <MIDIDevice name="Launchkey MK2 25 Launchkey InCo (IO)" enabled="1" input-latency="0" output-latency="0"/>
+            <MIDIDevice name="Launchkey MK2 25 Launchkey MIDI (IO)" enabled="1" input-latency="0" output-latency="0"/>
+          </MIDIDevices>
         </State>
       </EngineStates>
     </AudioMIDISetup>
@@ -283,7 +286,15 @@
     <Protocol name="ContourDesign" active="0" session-state="0"/>
     <Protocol name="Generic MIDI" active="0" session-state="0"/>
     <Protocol name="Mackie" active="0" session-state="0"/>
-    <Protocol name="Novation Launch Control XL" active="0" session-state="0"/>
+    <Protocol name="Novation Launch Control XL" feedback="0" active="0" session-state="0">
+      <Input>
+        <Port name="Launch Control XL in" direction="input"/>
+      </Input>
+      <Output>
+        <Port name="Launch Control XL out" direction="output"/>
+      </Output>
+      <Configuration fader8master="0"/>
+    </Protocol>
     <Protocol name="Open Sound Control (OSC)" active="0" session-state="0"/>
     <Protocol name="PreSonus FaderPort" active="0" session-state="0"/>
     <Protocol name="PreSonus FaderPort16" active="0" session-state="0"/>
