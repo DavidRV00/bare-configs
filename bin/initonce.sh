@@ -9,6 +9,6 @@ fi
 lookandfeeltool -a org.kde.breezedark.desktop &
 
 # Setup reminders
-terminal -e sh -c "vim $HOME/.cache/setupreminder" &
+terminal -e nvim "$HOME/.cache/setupreminder.md" &
 
 touch "$donefile"
