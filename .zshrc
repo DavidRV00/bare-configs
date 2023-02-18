@@ -99,6 +99,7 @@ bindkey -M vicmd "v" edit-command-line
 #fi
 #unset __conda_setup
 # <<< conda initialize <<<
+chpwd_functions+=__conda_reactivate
 
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
@@ -107,3 +108,5 @@ export FZF_DEFAULT_OPTS='--height 20% --border'
 
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
+
+alias nvm="unalias nvm; source /usr/share/nvm/init-nvm.sh; nvm"
