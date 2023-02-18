@@ -485,7 +485,7 @@ augroup c
 augroup END
 
 " Javascript and typescript
-augroup c
+augroup js
   autocmd BufNewFile,BufRead *.js,*.ts :set expandtab
 augroup END
 
