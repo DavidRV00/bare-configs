@@ -5,6 +5,9 @@ set nocompatible
 " Basic options "
 "==============="
 
+set exrc " Search the current directory for a .vimrc file
+"set secure " Shell, autocmd and write commands are not allowed in the local .vimrc
+
 set cursorline
 set tabpagemax=300
 set nohlsearch
@@ -21,6 +24,7 @@ set noshowmode
 "set noshowcmd
 set nowrap
 "set expandtab
+set signcolumn=no
 
 let $PAGER=''
 
@@ -105,55 +109,6 @@ function! XTermPasteBegin()
   return ""
 endfunction
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
-
-"" Rename tabs to show tab number.
-"" (Based on http://stackoverflow.com/questions/5927952
-""       /whats-implementation-of-vims-default-tabline-function)
-"if exists("+showtabline")
-"  function! MyTabLine()
-"    let s = ''
-"    let wn = ''
-"    let t = tabpagenr()
-"    let i = 1
-"    while i <= tabpagenr('$')
-"      let buflist = tabpagebuflist(i)
-"      let winnr = tabpagewinnr(i)
-"      let s .= '%' . i . 'T'
-"      "let s .= (i == t ? '%1*' : '%2*')
-"      "let s .= ' '
-"      let wn = tabpagewinnr(i,'$')
-"      "let s .= '%#TabNum#'
-"      let s .= (i == t ? '%#TabLineSel#' : '%#TabNum#')
-"      let s .= i
-"      "let s .= '%*'
-"      let s .= (i == t ? '%#TabLineSel#' : '%#TabLine#')
-"      let bufnr = buflist[winnr - 1]
-"      let file = bufname(bufnr)
-"      let buftype = getbufvar(bufnr, 'buftype')
-"      if buftype == 'nofile'
-"        if file =~ '\/.'
-"          let file = substitute(file, '.*\/\ze.', '', '')
-"        endif
-"      else
-"        let file = fnamemodify(file, ':p:t')
-"      endif
-"      if file == ''
-"        let file = '[No Name]'
-"      endif
-"      let s .= ':' . file . '%#TabLine# '
-"      let i = i + 1
-"    endwhile
-"    let s .= '%T%#TabLineFill#%='
-"    let s .= (tabpagenr('$') > 1 ? '%999XX' : 'X')
-"    let s .= '%#TabLineSel#'
-"    return s
-"  endfunction
-"  set stal=2
-"  set tabline=%!MyTabLine()
-"  set showtabline=1
-"  "set showtabline=2
-"  highlight link TabNum Special
-"endif
 
 " Maps
 let mapleader = ";"
@@ -471,6 +426,8 @@ if isdirectory(expand('$HOME/.vim/bundle/Vundle.vim'))
   nnoremap <silent> <F4> <Cmd>lua require'dap'.terminate()<CR>
   nnoremap <silent> <Leader>ds <Cmd>lua scopes_sidebar.open()<CR>
 
+	Plugin 'prisma/vim-prisma'
+
   Plugin 'spolu/dwm.vim'
   "Plugin 'davidrv00/dwm.vim-fork'
   "nnoremap <leader><space> :<C-u>call DWM_Focus()<CR>
@@ -518,7 +475,8 @@ augroup END
 
 " Auto draw graphviz files
 augroup gv
-  autocmd BufWritePost *.gv :silent !dot -Tpng % -o %.png
+  "autocmd BufWritePost *.gv :silent !dot -Tpng % -o %.png
+  autocmd BufWritePost *.gv,*.dot :silent !dot -Tsvg % -o %.svg
 augroup END
 
 " C-like files
@@ -585,8 +543,8 @@ highlight Comment cterm=italic
 "hi! CursorLineNr cterm=NONE ctermbg=232 ctermfg=68
 ""hi! CursorLineNr cterm=NONE ctermbg=68 ctermfg=232
 hi! CursorLineNr cterm=NONE ctermbg=233
-"hi! CursorLine cterm=NONE ctermbg=233
-hi! CursorLine cterm=NONE ctermbg=16
+hi! CursorLine cterm=NONE ctermbg=233
+"hi! CursorLine cterm=NONE ctermbg=16
 "hi! TabLineFill ctermfg=234 ctermbg=234
 ""hi! TabLineSel ctermbg=236 ctermfg=75
 "hi! TabLineSel ctermbg=68 ctermfg=16
@@ -615,8 +573,10 @@ hi! StatusLineNC ctermfg=234 ctermbg=234
 "hi! WildMenu ctermbg=236 ctermfg=39
 "hi! WildMenu ctermbg=68 ctermfg=16
 "hi! Folded ctermbg=233
-"hi! Visual ctermbg=233 cterm=none
+hi! Visual ctermbg=232 cterm=none
 ""hi! link QuickFixLine PmenuSel
+
+hi! MatchParen cterm=bold ctermbg=none ctermfg=red
 
 " air-line
 let g:airline_powerline_fonts = 1
