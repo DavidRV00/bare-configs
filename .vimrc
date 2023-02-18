@@ -5,9 +5,6 @@ set nocompatible
 " Basic options "
 "==============="
 
-set exrc " Search the current directory for a .vimrc file
-"set secure " Shell, autocmd and write commands are not allowed in the local .vimrc
-
 set cursorline
 set tabpagemax=300
 set nohlsearch
@@ -607,3 +604,6 @@ let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
+
+set exrc " Search the current directory for a .vimrc file
+"set secure " Shell, autocmd and write commands are not allowed in the local .vimrc
