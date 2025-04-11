@@ -34,6 +34,8 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 setopt dotglob
+setopt rmstarsilent
+setopt nullglob
 
 #export TERM=xterm-256color
 
@@ -80,6 +82,7 @@ precmd_functions+=(_fix_cursor)
 
 bindkey -M viins 'kj' vi-cmd-mode
 bindkey -s "^X^X" "clear\n"
+bindkey -s "^W" "settagwd\n"
 bindkey "^?" backward-delete-char
 autoload edit-command-line; zle -N edit-command-line
 bindkey -M vicmd "v" edit-command-line
@@ -110,3 +113,29 @@ eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
 
 alias nvm="unalias nvm; source /usr/share/nvm/init-nvm.sh; nvm"
+
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+ZSH_HIGHLIGHT_HIGHLIGHTERS+=(brackets pattern)
+
+ZSH_HIGHLIGHT_STYLES[builtin]='fg=green,bold'
+ZSH_HIGHLIGHT_STYLES[command]='fg=green,bold'
+ZSH_HIGHLIGHT_STYLES[function]='fg=green,bold'
+ZSH_HIGHLIGHT_STYLES[alias]='fg=green,bold'
+
+ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=green,bold'
+
+fpath+=~/.zfunc
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/david/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/home/david/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/david/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/david/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+export DEBUGINFOD_URLS="https://debuginfod.archlinux.org"
+
+
+if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+if [ -e /home/david/.nix-profile/etc/profile.d/nix.sh ]; then . /home/david/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+

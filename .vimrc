@@ -20,15 +20,27 @@ set mouse=a
 set noshowmode
 "set noshowcmd
 set nowrap
-"set expandtab
-set signcolumn=no
+set expandtab
+set signcolumn=number
+set textwidth=100
+
+set list
+"set listchars=tab:┃·
+"set listchars=tab:┃\ " Note the space
+"set listchars=tab:⸽\ " Note the space
+set listchars=tab:┆\ " Note the space
+"set listchars=tab:┆·
+"set listchars=tab:┆\ " Note the space
+
+set number
+set relativenumber
 
 let $PAGER=''
 
 " For some reason, for Go formatting I need to copy these lines into
 " ~/.vim/after/ftplugin/go.vim
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
@@ -42,6 +54,8 @@ augroup END
 let g:netrw_keepdir=0
 let g:netrw_banner=0
 
+autocmd VimResized * wincmd =
+
 "autocmd FileType qf wincmd J
 "augroup quickfixw
 "    autocmd!
@@ -51,12 +65,14 @@ let g:netrw_banner=0
 
 " Interesting to try out:
 "let g:netrw_altv          = 1
-"let g:netrw_fastbrowse    = 2
+"let g:netrw_fastbrowse = 2
 "let g:netrw_keepdir       = 0
 "let g:netrw_liststyle     = 2
 "let g:netrw_retmap        = 1
 "let g:netrw_silent        = 1
 "let g:netrw_special_syntax= 1
+
+let g:netrw_fastbrowse = 2
 
 "let g:netrw_keepj=""
 
@@ -117,9 +133,14 @@ inoremap <leader>w <Esc>:<C-u>w<CR>
 inoremap <C-S-O> <Esc>O
 nnoremap <leader>w :<C-u>w<CR>
 nnoremap <leader>sv :<C-u>source ~/.vimrc<CR>
-nnoremap <leader>v :<C-u>vsplit<CR>
-nnoremap <leader>b :<C-u>split<CR>
-nnoremap <leader>t :<C-u>tabnew %<CR>
+"nnoremap <leader>v :<C-u>vsplit<CR>
+"nnoremap <leader>b :<C-u>split<CR>
+nnoremap <leader>v :call DWM_New()<CR>
+nnoremap <leader>b :call DWM_New()<CR>
+nnoremap <c-s-cr> :call DWM_New()<CR>
+"nnoremap <C-S-c> :call DWM_Close()<CR>
+"nnoremap <leader>t :<C-u>tabnew %<CR>
+nnoremap <leader>t :execute "tabnew +" . ( line(".") ) ." %"<CR>
 nnoremap <leader>e :<C-u>e<Space>
 nnoremap -- :e .<CR>
 nnoremap === <C-w>=
@@ -148,7 +169,8 @@ nnoremap <leader>nt :Ntree<CR>ggj
 nnoremap <leader>S :%s//g<Left><Left>
 vnoremap <leader>S :s//g<Left><Left>
 nnoremap <leader>fm :!ranger $PWD<CR>
-nnoremap <leader>G :vimgrep //g **/*<Left><Left><Left><Left><Left><Left><Left>
+"nnoremap <leader>G :vimgrep //g **/*<Left><Left><Left><Left><Left><Left><Left>
+nnoremap <leader>G :grep -rn . -e ""<Left>
 nnoremap <leader>X :w<CR>:!sudo chmod a+x %<CR>
 nnoremap cl :<C-u>pclose <bar> lclose <bar> cclose<CR>
 nnoremap co :<C-u>cclose \| copen<CR>
@@ -162,8 +184,13 @@ inoremap <leader>db log.Infof("") // DEBUGGING<Esc>?"<Cr>i
 inoremap <expr> ,. pumvisible() ? "-><C-E><C-X><C-U>" : "-><C-X><C-U>"
 "inoremap ., <-
 nnoremap vvv ^v$h
+nnoremap <leader>mr 
 
-inoremap <expr> . pumvisible() ? ".<C-E><C-X><C-U>" : ".<C-X><C-U>"
+" specifying vimwiki is pretty brittle. I'm trying to stop it for markdown.
+autocmd WinEnter,BufEnter * if &ft != "vimwiki" | nnoremap p p`[v`]=
+autocmd WinEnter,BufEnter * if &ft != "vimwiki" | nnoremap P P`[v`]=
+
+"inoremap <expr> . pumvisible() ? ".<C-E><C-X><C-U>" : ".<C-X><C-U>"
 
 " Autoclose parens, brackets, etc...
 inoremap ( ()<Left>
@@ -181,6 +208,25 @@ inoremap <silent> ` <c-r>=QuoteDelim('`')<CR>
 "  autocmd Syntax html,vim inoremap < <lt>><Esc>i| inoremap > <c-r>=ClosePair('>')<CR>
 "augroup END
 
+let g:is_transparent = 0
+function! Toggle_transparent()
+    if g:is_transparent == 0
+        hi Normal guibg=NONE ctermbg=NONE
+        hi! EndOfBuffer ctermbg=232
+        let g:is_transparent = 1
+    elseif g:is_transparent == 1
+        hi Normal guibg=NONE ctermbg=NONE
+        hi EndOfBuffer guibg=NONE ctermbg=NONE
+        let g:is_transparent = 2
+    else
+        " TODO: Swap back to whatever color we had before
+        hi Normal  guibg=#424242 guifg=#F3F3F3 ctermbg=0 ctermfg=255
+        hi! EndOfBuffer ctermbg=232
+        let g:is_transparent = 0
+    endif
+endfunction
+nnoremap <leader><C-t> : call Toggle_transparent()<CR>
+
 " Function text object (only works in Go)
 vnoremap af <Esc>:silent! normal! l<CR>?^func <CR>V$%
 vmap if <Esc>:silent! normal! l<CR>?^func <CR>$vi{
@@ -196,9 +242,9 @@ vnoremap xy <Esc>`xv`y
 
 function! ClosePair(char)
   if getline('.')[col('.') - 1] == a:char
-  return "\<Right>"
+  	return "\<Right>"
   else
-  return a:char
+  	return a:char
   endif
 endf
 
@@ -251,6 +297,17 @@ nnoremap - -
 "    "noremap <buffer> a
 "endfunction
 
+" Always have python provider
+
+" TODO: Investigate this later; VIRTUAL_ENV isn't set by conda anymore?
+"if exists("$VIRTUAL_ENV")
+"    let g:python3_host_prog=substitute(system("which -a python3 | head -n2 | tail -n1"), "\n", '', 'g')
+"else
+"    let g:python3_host_prog=substitute(system("which python3"), "\n", '', 'g')
+"endif
+
+let g:python3_host_prog=substitute(system("which -a python3 | head -n2 | tail -n1"), "\n", '', 'g')
+
 "========================================="
 " Vundle configuration / External plugins "
 "========================================="
@@ -283,6 +340,7 @@ if isdirectory(expand('$HOME/.vim/bundle/Vundle.vim'))
   let g:NERDCommentEmptyLines = 1
   let g:NERDDefaultAlign = 'left'
   let g:NERDToggleCheckAllLines = 1
+  let g:NERDCustomDelimiters = { 'c': { 'left': '// ','right': '' }, 'cpp': { 'left': '// ','right': '' } }
 
   " Smooth navigation between tmux panes and vim buffers with ctrl-direction
   "Plugin 'christoomey/vim-tmux-navigator'
@@ -362,6 +420,8 @@ if isdirectory(expand('$HOME/.vim/bundle/Vundle.vim'))
 
   Plugin 'mboughaba/i3config.vim'
 
+  Plugin 'p00f/clangd_extensions.nvim'
+
   "Plugin 'jackguo380/vim-lsp-cxx-highlight'
 
   Plugin 'neovim/nvim-lspconfig'
@@ -423,12 +483,27 @@ if isdirectory(expand('$HOME/.vim/bundle/Vundle.vim'))
   nnoremap <silent> <F4> <Cmd>lua require'dap'.terminate()<CR>
   nnoremap <silent> <Leader>ds <Cmd>lua scopes_sidebar.open()<CR>
 
-	Plugin 'prisma/vim-prisma'
+  Plugin 'prisma/vim-prisma'
+  Plugin 'dylon/vim-antlr'
 
   Plugin 'spolu/dwm.vim'
   "Plugin 'davidrv00/dwm.vim-fork'
   "nnoremap <leader><space> :<C-u>call DWM_Focus()<CR>
-  nnoremap <cr> :<C-u>call DWM_Focus()<CR>
+  "nnoremap <cr> :<C-u>call DWM_Focus()<CR>
+  nnoremap <C-cr> :<C-u>call DWM_Focus()<CR>
+
+  Plugin 'nvim-treesitter/nvim-treesitter-textobjects'
+
+  Plugin 'nvim-lua/plenary.nvim'
+  Plugin 'ThePrimeagen/refactoring.nvim'
+
+  "Plugin 'nvim-tree/nvim-web-devicons'
+  "Plugin 'MunifTanjim/nui.nvim'
+  "Plugin 'nvim-neo-tree/neo-tree.nvim'
+  
+  Plugin 'Vimjas/vim-python-pep8-indent'
+
+  Plugin 'mustache/vim-mustache-handlebars'
   
   " Load non-portable plugins and settings
   source $HOME/.vim_vundle_noport.vim
@@ -445,6 +520,8 @@ source $HOME/.vim_noport.vim
 " This must be done AFTER loading plugins and sourcing configuration.
 filetype plugin indent on
 syntax on
+
+au BufNewFile *.py,*.sh,*.bash,*.c,*.cpp,*.cu silent! call feedkeys(':0r ~/projects/component-templates/basic/'.expand("%:e")."/\<Tab>", 'tn')
 
 " Notebook conceal
 augroup py
@@ -476,9 +553,19 @@ augroup gv
   autocmd BufWritePost *.gv,*.dot :silent !dot -Tsvg % -o %.svg
 augroup END
 
+" Render markdown to html
+augroup md
+    autocmd BufNewFile,BufRead *.md nnoremap <buffer> <leader>md :silent !md %<CR>
+augroup END
+
 " C-like files
 augroup c
   autocmd BufNewFile,BufRead *.c,*.cpp,*.cc,*.h,*.hpp :set expandtab
+augroup END
+
+" Python indentation
+augroup pyindent
+	autocmd BufNewFile,BufRead *.py :set noexpandtab
 augroup END
 
 " Javascript and typescript
@@ -486,26 +573,29 @@ augroup js
   autocmd BufNewFile,BufRead *.js,*.ts :set expandtab
 augroup END
 
+set notermguicolors
+colorscheme greenwint-drayva
+"colorscheme Atelier_CaveLight
+
 " Appearance
 set background=dark
 
+"colorscheme vibrantink
+"colorscheme OceanicNext
 "colorscheme Atelier_CaveDark
 "colorscheme 1989
-colorscheme OceanicNext
 "colorscheme blues
-
 "colorscheme wasabi256
-colorscheme vibrantink
 
-let g:airline_theme='base16_eighties'
 "let g:airline_theme='base16_ashes'
+"let g:airline_theme='base16_eighties'
 "let g:airline_theme='badwolf'
 "let g:airline_theme='biogoo'
 "let g:airline_theme='fairyfloss'
 "let g:airline_theme='jet'
 "let g:airline_theme='base16_google'
 "let g:airline_theme='peaksea'
-"let g:airline_theme='behelit'
+let g:airline_theme='behelit'
 
 "let g:airline_section_c = airline#section#create(['%-20f'])
 "let g:airline_section_gutter = airline#section#create([' ---------------------------- %='])
@@ -525,6 +615,7 @@ let g:airline_theme='base16_eighties'
 "set cursorline
 augroup colorenter
 	autocmd WinEnter * set cursorline
+    autocmd BufEnter * set cursorline
 	autocmd WinLeave * set nocursorline
 augroup END
 
@@ -532,51 +623,56 @@ augroup END
 "set fillchars+=vert:∎" Note the space
 set fillchars+=vert:┃" Note the space
 
-highlight Comment cterm=italic
-
+"highlight Comment cterm=italic
+"
+""hi! Normal ctermbg=232
 "hi! Normal ctermbg=NONE
-"hi! ColorColumn ctermbg=232
-"hi! LineNr ctermbg=232 ctermfg=236
-"hi! CursorLineNr cterm=NONE ctermbg=232 ctermfg=68
-""hi! CursorLineNr cterm=NONE ctermbg=68 ctermfg=232
-hi! CursorLineNr cterm=NONE ctermbg=233
-hi! CursorLine cterm=NONE ctermbg=233
-"hi! CursorLine cterm=NONE ctermbg=16
-"hi! TabLineFill ctermfg=234 ctermbg=234
-""hi! TabLineSel ctermbg=236 ctermfg=75
-"hi! TabLineSel ctermbg=68 ctermfg=16
-"hi! TabLine ctermbg=234 cterm=None
-"hi! TabNum ctermbg=234 ctermfg=None
-"hi! Pmenu ctermbg=24 ctermfg=16
-"hi! PmenuSel ctermbg=16 ctermfg=39
-hi! Conceal ctermfg=68 ctermbg=NONE
-"hi! VertSplit ctermbg=16 ctermfg=16
-"hi! VertSplit ctermbg=NONE ctermfg=232
-"hi! VertSplit ctermbg=232 ctermfg=232
-hi! VertSplit ctermbg=232 ctermfg=0
-"hi! SignColumn ctermbg=232
-"hi! EndOfBuffer ctermbg=232
-""hi! StatusLine ctermfg=247 ctermbg=16
+""hi! ColorColumn ctermbg=232
+""hi! LineNr ctermbg=232 ctermfg=236
+""hi! CursorLineNr cterm=NONE ctermbg=232 ctermfg=68
+"""hi! CursorLineNr cterm=NONE ctermbg=68 ctermfg=232
+"hi! CursorLineNr cterm=NONE ctermbg=233
+"hi! CursorLine cterm=NONE ctermbg=233
+""hi! CursorLine cterm=NONE ctermbg=16
+""hi! TabLineFill ctermfg=234 ctermbg=234
+"""hi! TabLineSel ctermbg=236 ctermfg=75
+""hi! TabLineSel ctermbg=68 ctermfg=16
+""hi! TabLine ctermbg=234 cterm=None
+""hi! TabNum ctermbg=234 ctermfg=None
+"hi! Pmenu ctermbg=238 ctermfg=7
+"hi! PmenuSel ctermbg=236 ctermfg=7
+"hi! Conceal ctermfg=68 ctermbg=NONE
+""hi! VertSplit ctermbg=16 ctermfg=16
+"hi! VertSplit ctermbg=NONE ctermfg=241
+""hi! VertSplit ctermbg=232 ctermfg=232
+""hi! VertSplit ctermbg=232 ctermfg=0
+""hi! SignColumn ctermbg=232
+""hi! EndOfBuffer ctermbg=232
+"""hi! StatusLine ctermfg=247 ctermbg=16
+""
+""" Set this dynamically based on whether the menu is up?
+""" Or, just make it the same color as the status line?
+""hi! StatusLine ctermfg=100 ctermbg=NONE 
+""
+"hi! StatusLine ctermfg=241 ctermbg=241
+""hi! StatusLineNC ctermfg=234 ctermbg=234
+"hi! StatusLineNC ctermfg=241 ctermbg=241
+""hi! StatusLineNC ctermfg=16 ctermbg=16
+""hi! StatusLineNC ctermfg=NONE ctermbg=NONE
+""hi! StatusLineNC ctermbg=232 ctermfg=232
+""hi! WildMenu ctermbg=236 ctermfg=39
+""hi! WildMenu ctermbg=236 ctermfg=39
+""hi! WildMenu ctermbg=68 ctermfg=16
+"hi! Folded ctermbg=none
+"hi! Visual ctermbg=233 cterm=none
+"""hi! link QuickFixLine PmenuSel
 "
-"" Set this dynamically based on whether the menu is up?
-"" Or, just make it the same color as the status line?
-"hi! StatusLine ctermfg=100 ctermbg=NONE 
-"
-hi! StatusLine ctermfg=234 ctermbg=234 
-hi! StatusLineNC ctermfg=234 ctermbg=234
-"hi! StatusLineNC ctermfg=16 ctermbg=16
-"hi! StatusLineNC ctermfg=NONE ctermbg=NONE
-"hi! StatusLineNC ctermbg=232 ctermfg=232
-"hi! WildMenu ctermbg=236 ctermfg=39
-"hi! WildMenu ctermbg=68 ctermfg=16
-"hi! Folded ctermbg=233
-hi! Visual ctermbg=232 cterm=none
-""hi! link QuickFixLine PmenuSel
-
-hi! MatchParen cterm=bold ctermbg=none ctermfg=red
+"hi! MatchParen cterm=bold ctermbg=none ctermfg=red
 
 " air-line
-let g:airline_powerline_fonts = 1
+"let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
+let g:airline#extensions#whitespace#enabled = 0
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -597,13 +693,13 @@ endif
 "let g:airline_symbols.whitespace = 'Ξ'
 
 " airline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
+"let g:airline_left_sep = ''
+"let g:airline_left_alt_sep = ''
+"let g:airline_right_sep = ''
+"let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
-set exrc " Search the current directory for a .vimrc file
+set exrc " Search the current directory for a .vimrc (.exrc) file
 "set secure " Shell, autocmd and write commands are not allowed in the local .vimrc
